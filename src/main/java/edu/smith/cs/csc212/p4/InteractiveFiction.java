@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class InteractiveFiction {
 
+	
 	/**
 	 * This is where we play the game.
 	 * @param args
@@ -57,7 +58,8 @@ public class InteractiveFiction {
 			// Get the word they typed as lowercase, and no spaces.
 			String action = words.get(0).toLowerCase().trim();
 			
-			if (action.equals("quit")) {
+			// This code handles manual quitting of the game.			
+			if (action.equals("quit") || action.equals("q") || action.equals("escape")) {
 				if (input.confirm("Are you sure you want to quit?")) {
 					break;
 				} else {

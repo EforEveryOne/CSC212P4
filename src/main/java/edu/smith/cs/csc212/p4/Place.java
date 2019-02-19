@@ -81,7 +81,7 @@ public class Place {
 	}
 	
 	/**
-	 * This is a terminal location (good or bad).
+	 * This is a terminal location (good or bad) ends the game.
 	 * @param id - this is the id of the place (for creating {@link Exit} objects that go here).
 	 * @param description - this is the description of the place.
 	 * @return the Place object.
