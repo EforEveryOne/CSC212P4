@@ -28,14 +28,12 @@ public class Exit {
 		this.target = target;
 	}
 	
-	
 	/**
 	 * This does not do anything because there is nothing to find in normal exits.
 	 * @return 
 	 */
 	public void search() {
 	}
-	
 	
 	/**
 	 * Normal exits are never secret, so it returns false (they are not hidden).
@@ -46,15 +44,6 @@ public class Exit {
 		return false;
 	}
 	
-	
-
-//	public boolean isSecret() {
-//		// TODO Auto-generated method stub
-//		return this.isSecret;
-//	}	
-//	
-	
-	
 	/**
 	 * A getter for the description of this exit.
 	 * @return how it looks.
@@ -62,12 +51,6 @@ public class Exit {
 	public String getDescription() {
 		return this.description;
 	}
-	
-//	Create search method here?
-//	Player can stay in a room and search for information (find secrets!)
-	
-	
-	
 	
 	/**
 	 * A getter for the target place of this exit.

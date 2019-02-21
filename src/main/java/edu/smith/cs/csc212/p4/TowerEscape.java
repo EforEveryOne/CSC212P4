@@ -33,11 +33,16 @@ public class TowerEscape implements GameWorld {
 		Place spiralStairs = insert(
 				Place.create("spiralStairs", "The staircase is very long but there are torches to guide you. \nYou reach the top after several minutes. \n\n"));
 		spiralStairs.addExit(new Exit("firstFloor", "There is a large wooden door with a rustic handle. "));
+		spiralStairs.addExit(new Exit("towerTop", "You see sunshine shimmer through down the stairs. Is this the end?"));
+		
 		
 		Place firstFloorSecretExit = insert(
 				Place.terminal("firstFloorSecretExit", "After you press the brick the wall rumbles and the bricks slide away revealing an exit from the tower. "
 						+ "\nRays of sunshine fill the exit. \nYou're free."));
 		
+		Place towerTop = insert(
+				Place.terminal("towerTop", "You can see everything from atop the tower."
+						+ "\nA giant moth offers to fly you home. \nYou're free."));
 		
 //		Place basement = insert(
 //				Place.create("basement", "You have found the basement of the mansion.\n" + 

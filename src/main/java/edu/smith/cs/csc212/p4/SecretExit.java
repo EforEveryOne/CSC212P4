@@ -10,7 +10,6 @@ public class SecretExit extends Exit {
 		hidden = true;
 	}
 	
-	
 	/**
 	 * We're saying the our exit is a secret and we won't reveal it until the players searchs for it.
 	 */
@@ -26,8 +25,5 @@ public class SecretExit extends Exit {
 	@Override
 	public void search() {
 		hidden = false;
-		  }
-		
-	
-	
+	}
 }

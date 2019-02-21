@@ -15,7 +15,6 @@ public class Place {
 	 */
 	private List<Exit> exits;
 
-	
 	/**
 	 * This is the identifier of the place.
 	 */
@@ -29,6 +28,11 @@ public class Place {
 	 */
 	private boolean terminal;
 	
+
+	public List<String> playerInventory = new ArrayList<>();
+
+	private String item;
+	
 	/**
 	 * Internal only constructor for Place. Use {@link #create(String, String)} or {@link #terminal(String, String)} instead.
 	 * @param id - the internal id of this place.
@@ -38,6 +42,7 @@ public class Place {
 	private Place(String id, String description, boolean terminal) {
 		this.id = id;
 		this.description = description;
+		this.item = item;
 		this.exits = new ArrayList<>();
 		this.terminal = terminal;
 	}
@@ -58,6 +63,10 @@ public class Place {
 		this.exits.add(exit);
 	}
 	
+	
+	public String getInventory() {
+		return this.item;
+	}
 	/**
 	 * For gameplay, whether this place ends the game.
 	 * @return true if this is the end.
@@ -82,6 +91,7 @@ public class Place {
 		return this.description;
 	}
 
+
 	/**
 	 * Get a view of the exits from this Place, for navigation.
 	 * @return all the exits from this place.
@@ -96,14 +106,7 @@ public class Place {
 		    }
 		  }
 		  return output;
-		
-//	
-//		return Collections.unmodifiableList(exits);
-//		only return if a player found the secret exit. return all normal exits, too.
-	
 	}
-	
-	
 	
 	/**
 	 * This is a terminal location (good or bad) ends the game.
@@ -148,5 +151,4 @@ public class Place {
 		}
 		return false;
 	}
-	
 }

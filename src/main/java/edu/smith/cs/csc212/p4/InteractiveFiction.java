@@ -13,6 +13,7 @@ public class InteractiveFiction {
 	/**
 	 * This is where we play the game.
 	 * @param args
+	 * @param hour 
 	 */
 	public static void main(String[] args) {
 		// This is a text input source (provides getUserWords() and confirm()).
@@ -20,6 +21,9 @@ public class InteractiveFiction {
 
 		// This is the game we're playing.
 		GameWorld game = new TowerEscape();
+		
+//		GameTime time = new GameTime(hour, 0);
+		GameTime time = new GameTime(0, 0); 
 		
 		// This is the current location of the player (initialize as start).
 		// Maybe we'll expand this to a Player object.
@@ -32,10 +36,14 @@ public class InteractiveFiction {
 			// Print the description of where you are.
 			Place here = game.getPlace(place);
 			System.out.println(here.getDescription());
+	
 			
-
+			System.out.println(time.getHour());
+			time.increaseHour();
+			
 			// Game over after print!
 			if (here.isTerminalState()) {
+				System.out.println("You have been trapped in the tower for: " + time.getTotalHour() + " hours in total.");
 				break;
 			}
 
@@ -61,7 +69,12 @@ public class InteractiveFiction {
 
 			
 //			This should work but it doesn't. Why?
-			if (action.equals("search")) {
+			if (action.equals("stuff")) {
+				System.out.println("You have nothing");
+				continue;
+			}
+			
+			else if (action.equals("search")) {
 				for(Exit e: exits) {
 				e.search();
 				continue;
