@@ -19,7 +19,7 @@ public class InteractiveFiction {
 		TextInput input = TextInput.fromArgs(args);
 
 		// This is the game we're playing.
-		GameWorld game = new SpookyMansion();
+		GameWorld game = new TowerEscape();
 		
 		// This is the current location of the player (initialize as start).
 		// Maybe we'll expand this to a Player object.
@@ -28,9 +28,11 @@ public class InteractiveFiction {
 		// Play the game until quitting.
 		// This is too hard to express here, so we just use an infinite loop with breaks.
 		while (true) {
+		
 			// Print the description of where you are.
 			Place here = game.getPlace(place);
 			System.out.println(here.getDescription());
+			
 
 			// Game over after print!
 			if (here.isTerminalState()) {
@@ -39,7 +41,6 @@ public class InteractiveFiction {
 
 			// Show a user the ways out of this place.
 			List<Exit> exits = here.getVisibleExits();
-			
 			for (int i=0; i<exits.size(); i++) {
 			    Exit e = exits.get(i);
 				System.out.println(" ["+i+"] " + e.getDescription());
@@ -57,9 +58,18 @@ public class InteractiveFiction {
 			
 			// Get the word they typed as lowercase, and no spaces.
 			String action = words.get(0).toLowerCase().trim();
+
+			
+//			This should work but it doesn't. Why?
+			if (action.equals("search")) {
+				for(Exit e: exits) {
+				e.search();
+				continue;
+				}
+			}
 			
 			// This code handles manual quitting of the game.			
-			if (action.equals("quit") || action.equals("q") || action.equals("escape")) {
+			else if(action.equals("quit") || action.equals("q") || action.equals("escape")) {
 				if (input.confirm("Are you sure you want to quit?")) {
 					break;
 				} else {
@@ -89,5 +99,4 @@ public class InteractiveFiction {
 		// You get here by "quit" or by reaching a Terminal Place.
 		System.out.println(">>> GAME OVER <<<");
 	}
-
 }

@@ -14,6 +14,8 @@ public class Place {
 	 * This is a list of places we can get to from this place.
 	 */
 	private List<Exit> exits;
+
+	
 	/**
 	 * This is the identifier of the place.
 	 */
@@ -49,6 +51,14 @@ public class Place {
 	}
 	
 	/**
+	 * This method creates a hidden door! From the SecretExit class.
+	 * It wont be revealed until the player puts in some effort and searches for it.
+	 */
+	public void addSecretExit(SecretExit exit) {
+		this.exits.add(exit);
+	}
+	
+	/**
 	 * For gameplay, whether this place ends the game.
 	 * @return true if this is the end.
 	 */
@@ -77,8 +87,23 @@ public class Place {
 	 * @return all the exits from this place.
 	 */
 	public List<Exit> getVisibleExits() {
-		return Collections.unmodifiableList(exits);
+		  List<Exit> output = new ArrayList<>();
+		  for (Exit e : this.exits) {
+		    if (e.isSecret()) {
+		      // don't show to player
+		    } else {
+		      output.add(e);
+		    }
+		  }
+		  return output;
+		
+//	
+//		return Collections.unmodifiableList(exits);
+//		only return if a player found the secret exit. return all normal exits, too.
+	
 	}
+	
+	
 	
 	/**
 	 * This is a terminal location (good or bad) ends the game.

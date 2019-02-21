@@ -21,11 +21,39 @@ public class Exit {
 	 * Create a new Exit.
 	 * @param target - where it goes.
 	 * @param description - how it looks.
+	 * @param isSecret 
 	 */
 	public Exit(String target, String description) {
 		this.description = description;
 		this.target = target;
 	}
+	
+	
+	/**
+	 * This does not do anything because there is nothing to find in normal exits.
+	 * @return 
+	 */
+	public void search() {
+	}
+	
+	
+	/**
+	 * Normal exits are never secret, so it returns false (they are not hidden).
+	 * Also we needed a return type so we can Override this in the SecretExit class.
+	 * @return
+	 */
+	public boolean isSecret() {
+		return false;
+	}
+	
+	
+
+//	public boolean isSecret() {
+//		// TODO Auto-generated method stub
+//		return this.isSecret;
+//	}	
+//	
+	
 	
 	/**
 	 * A getter for the description of this exit.
@@ -34,6 +62,12 @@ public class Exit {
 	public String getDescription() {
 		return this.description;
 	}
+	
+//	Create search method here?
+//	Player can stay in a room and search for information (find secrets!)
+	
+	
+	
 	
 	/**
 	 * A getter for the target place of this exit.
@@ -76,4 +110,6 @@ public class Exit {
 		}
 		return false;
 	}
+
+
 }
