@@ -28,11 +28,6 @@ public class Place {
 	 */
 	private boolean terminal;
 	
-
-	public List<String> playerInventory = new ArrayList<>();
-
-	private String item;
-	
 	/**
 	 * Internal only constructor for Place. Use {@link #create(String, String)} or {@link #terminal(String, String)} instead.
 	 * @param id - the internal id of this place.
@@ -42,7 +37,6 @@ public class Place {
 	private Place(String id, String description, boolean terminal) {
 		this.id = id;
 		this.description = description;
-		this.item = item;
 		this.exits = new ArrayList<>();
 		this.terminal = terminal;
 	}
@@ -63,10 +57,6 @@ public class Place {
 		this.exits.add(exit);
 	}
 	
-	
-	public String getInventory() {
-		return this.item;
-	}
 	/**
 	 * For gameplay, whether this place ends the game.
 	 * @return true if this is the end.
@@ -100,13 +90,30 @@ public class Place {
 		  List<Exit> output = new ArrayList<>();
 		  for (Exit e : this.exits) {
 		    if (e.isSecret()) {
-		      // don't show to player
+		     // don't show to player
 		    } else {
 		      output.add(e);
+		      }
 		    }
-		  }
 		  return output;
-	}
+		  }
+	
+/**
+ * This gets called in our InteractiveFiction so the player can search.
+ * And in here we call search from our SecretExit class which swaps the hidden variable to false. 
+ * getVisibleExits made a list of visible exits so now we check for hidden ones here.
+ */
+	public void search() {
+		for (Exit e : this.exits) {
+			if (e instanceof SecretExit) {
+				SecretExit exit = (SecretExit) e;
+//				If it was a secret exit with hidden set to true, we call search which turns hidden to false.
+				if (exit.isSecret()) {
+					exit.search();
+					}
+				}
+			}
+		}
 	
 	/**
 	 * This is a terminal location (good or bad) ends the game.

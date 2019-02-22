@@ -22,13 +22,14 @@ public class InteractiveFiction {
 		// This is the game we're playing.
 		GameWorld game = new TowerEscape();
 		
-//		GameTime time = new GameTime(hour, 0);
+//		Access to our time class.
 		GameTime time = new GameTime(0, 0); 
 		
 		// This is the current location of the player (initialize as start).
 		// Maybe we'll expand this to a Player object.
 		String place = game.getStart();
 
+		
 		// Play the game until quitting.
 		// This is too hard to express here, so we just use an infinite loop with breaks.
 		while (true) {
@@ -36,9 +37,8 @@ public class InteractiveFiction {
 			// Print the description of where you are.
 			Place here = game.getPlace(place);
 			System.out.println(here.getDescription());
-	
 			
-			System.out.println(time.getHour());
+			System.out.println("Your watch reads: " + time.getHour() + " o'clock.");
 			time.increaseHour();
 			
 			// Game over after print!
@@ -53,8 +53,9 @@ public class InteractiveFiction {
 			    Exit e = exits.get(i);
 				System.out.println(" ["+i+"] " + e.getDescription());
 			}
-
-			// Figure out what the user wants to do, for now, only "quit" is special.
+			
+			
+			// Figure out what the user wants to do.
 			List<String> words = input.getUserWords(">");
 			if (words.size() == 0) {
 				System.out.println("Must type something!");
@@ -67,20 +68,26 @@ public class InteractiveFiction {
 			// Get the word they typed as lowercase, and no spaces.
 			String action = words.get(0).toLowerCase().trim();
 
-			
-//			This should work but it doesn't. Why?
+//			Supposed to be inventory command. Not functional.
 			if (action.equals("stuff")) {
-				System.out.println("You have nothing");
+				System.out.println("You have nothing but your wrist watch. ");
 				continue;
 			}
 			
+//			If the player rests they spend more time here and time passes. No functionality beyond that.
+			else if (action.equals("rest")) {
+				time.increaseHour();
+				time.increaseHour();
+			}
+
+//			Player searches the room and finds any hidden exits.
 			else if (action.equals("search")) {
-				for(Exit e: exits) {
-				e.search();
+				here.search();
+//				Searching takes time!
+				time.increaseHour();
 				continue;
-				}
 			}
-			
+		
 			// This code handles manual quitting of the game.			
 			else if(action.equals("quit") || action.equals("q") || action.equals("escape")) {
 				if (input.confirm("Are you sure you want to quit?")) {
@@ -89,6 +96,7 @@ public class InteractiveFiction {
 					continue;
 				}
 			}
+			
 			
 			// From here on out, what they typed better be a number!
 			Integer exitNum = null;
@@ -110,6 +118,7 @@ public class InteractiveFiction {
 		}
 
 		// You get here by "quit" or by reaching a Terminal Place.
-		System.out.println(">>> GAME OVER <<<");
+		System.out.println("\n\n>>> GAME OVER <<< \n\n");
+		System.out.println(">>> CONGRATULATIONS <<<");
 	}
 }

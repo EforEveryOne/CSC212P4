@@ -24,83 +24,71 @@ public class TowerEscape implements GameWorld {
 	 */
 	public TowerEscape() {
 		Place firstFloor = insert(
-				Place.create("firstFloor", "You wake up in a large room lit by torches. \n"
+				Place.create("firstFloor", "You wake up in a large room lit by torches. \nYou have a strange watch on your wrist. \n"
 						+ "The walls are made out of stone cold bricks. \n\n"));
 		firstFloor.addExit(new Exit("spiralStairs", "A long spiraling staircase extends upwards. "));
 		firstFloor.addSecretExit(new SecretExit("firstFloorSecretExit", "There is a brick that looks out of place on the wall, maybe you should press it?"));
-		
-				
-		Place spiralStairs = insert(
-				Place.create("spiralStairs", "The staircase is very long but there are torches to guide you. \nYou reach the top after several minutes. \n\n"));
-		spiralStairs.addExit(new Exit("firstFloor", "There is a large wooden door with a rustic handle. "));
-		spiralStairs.addExit(new Exit("towerTop", "You see sunshine shimmer through down the stairs. Is this the end?"));
-		
-		
+// This is our bottom secret exit.
 		Place firstFloorSecretExit = insert(
 				Place.terminal("firstFloorSecretExit", "After you press the brick the wall rumbles and the bricks slide away revealing an exit from the tower. "
 						+ "\nRays of sunshine fill the exit. \nYou're free."));
+				
+		
+		Place spiralStairs = insert(
+				Place.create("spiralStairs", "The staircase is very long but there are torches to guide you. \nIt takes several minutes to traverse the steps. \n\n"));
+		spiralStairs.addExit(new Exit("firstFloor", "Go back to the first floor. "));
+		spiralStairs.addExit(new Exit("secondFloor", "There is a large wooden door with a rustic handle at the top. "));
+		
+		Place secondFloor = insert(
+				Place.create("secondFloor", "You reached the second floor. \nIn the torchlight you see old rotted and dusty furniture around the room. \n\n"));
+		secondFloor.addExit(new Exit("spiralStairs", "Go back to the spiral stairs."));
+		secondFloor.addExit(new Exit("secondFloorHall", "There is a dimly lit hallway to your right. "));
+		secondFloor.addExit(new Exit("stairs2", "There is another staircase that goes up in the corner of the room. "));
+		
+		Place secondFloorHall = insert(
+				Place.create("secondFloorHall", "The hallway opens into a massive room but it's empty... \nYou feel a chill run down your spine."));
+		secondFloorHall.addExit(new Exit("secondFloor", "Go back through the hallway "));
+
+		
+		Place stairs2 = insert(
+				Place.create("stairs2", "These stairs are narrow and you have to feel your way around because there are no torches. "));
+		stairs2.addExit(new Exit("secondFloor", "Go back to the second floor."));
+		stairs2.addExit(new Exit("thirdFloor", "There's a door at the top. "));
+		
+		Place thirdFloor = insert(
+				Place.create("thirdFloor", "You made it to the third floor. There is a set table with rotting food. "));
+		thirdFloor.addExit(new Exit("stairs2", "Go back to the the dark stairs. "));
+		thirdFloor.addExit(new Exit("thirdFloorHall", "There's a dark hallway to your left. "));
+		thirdFloor.addExit(new Exit("towerTopStairs", "Grand stairs are well lit with torches at the far end of the room. "));
+		
+		Place thirdFloorHall = insert(
+				Place.create("thirdFloorHall", "It's hard to see in this hall. "));
+		thirdFloorHall.addExit(new Exit("thirdFloor", "Go back to third floor room. "));
+		thirdFloorHall.addExit(new Exit("stairs2Passage", "There's a trap door at the end of the hall. You can't see the bottom. Jump down? "));
+
+		Place stairs2Passage = insert(
+				Place.create("stairs2Passage", "You fall and land on your butt. Torches light up suddenly light up the room."
+						+ "\nThere is a scrap of paper on a table."
+						+ "\nThe paper reads: SEARCH (you can type search in console) "));
+		stairs2Passage.addExit(new Exit("stairs2", "The only exit is an opening the drops into a dark and narrow stairway. "));
+		
+		Place towerTopStairs = insert(
+				Place.create("towerTopStairs", "These stairs are narrow and you have to feel your way around because there are no torches. "));
+		towerTopStairs.addExit(new Exit("thirdFloor", "Go back to the third floor. "));
+		towerTopStairs.addExit(new Exit("towerTop", "The stairs are very wide and look like they spiral upward forever but you think you see light at the very top. "));
+		
 		
 		Place towerTop = insert(
-				Place.terminal("towerTop", "You can see everything from atop the tower."
-						+ "\nA giant moth offers to fly you home. \nYou're free."));
-		
-//		Place basement = insert(
-//				Place.create("basement", "You have found the basement of the mansion.\n" + 
-//		                           "It is darker down here.\n" +
-//						"You get the sense a secret is nearby, but you only see the stairs you came from."
-//						));
-//		basement.addExit(new Exit("startRoom", "There are stairs leading up."));
-//		basement.addExit(new Exit("basement2", "There's a large celler door..."));
-//		
-//		Place basement2 = insert(Place.create("basement2", "It was difficult to open. \n" + "It smells rancid in here."));
-//		basement2.addExit(new Exit("basement", "Go back."));
-//
-//		Place attic = insert(Place.create("attic",
-//				"Something rustles in the rafters as you enter the attic. Creepy.\n" + "It's big up here."));
-//		attic.addExit(new Exit("startRoom", "There are stairs leading down."));
-//		attic.addExit(new Exit("attic2", "There is more through an archway."));
-//
-//		Place attic2 = insert(Place.create("attic2", "There's definitely a bat in here somewhere.\n"
-//				+ "This part of the attic is brighter, so maybe you're safe here."));
-//		attic2.addExit(new Exit("attic", "Go back to the attic entrance."));
-//		attic2.addExit(new Exit ("attic3", "There's a door ahead."));
-//		
-//		Place attic3 = insert(Place.create("attic3", "The room is dark and empty. The attic ends here. "));
-//		attic3.addExit(new Exit("attic2", "Leave the room. "));
-//		
-//		
-//		Place kitchen = insert(Place.create("kitchen", "You've found the kitchen. You smell old food and some kind of animal."));
-//		kitchen.addExit(new Exit("startRoom", "There is a red door."));
-//		kitchen.addExit(new Exit("dumbwaiter", "There is a dumbwaiter."));
-//		
-//		Place dumbwaiter = insert(Place.create("dumbwaiter", "You crawl into the dumbwaiter. What are you doing?"));
-//		dumbwaiter.addExit(new Exit("secretRoom", "Take it to the bottom."));
-//		dumbwaiter.addExit(new Exit("kitchen", "Take it to the middle-level."));
-//		dumbwaiter.addExit(new Exit("attic2", "Take it up to the top."));
-//		
-//		Place secretRoom = insert(Place.create("secretRoom", "You have found the secret room."));
-//		secretRoom.addExit(new Exit("hallway0", "There is a long hallway."));
-//		secretRoom.addExit(new Exit("basement", "This is an Exit from secretRoom to the basment. "));
-//		
-//		int hallwayDepth = 4;
-//		int lastHallwayPart = hallwayDepth - 1;
-//		for (int i=0; i<hallwayDepth; i++) {
-//			Place hallwayPart = insert(Place.create("hallway"+i, "This is a very long hallway.\n" + "There is a #" + (i + 1) + " scratched onto the wall."));
-//			if (i == 0) {
-//				hallwayPart.addExit(new Exit("secretRoom", "Go back.", false));
-//			} else {
-//				hallwayPart.addExit(new Exit("hallway"+(i-1), "Go back.", false));
-//			}
-//			if (i != lastHallwayPart) {
-//				hallwayPart.addExit(new Exit("hallway"+(i+1), "Go forward.", false));
-//			} else {
-//				hallwayPart.addExit(new Exit("crypt", "There is darkness ahead.", false));
-//			}
-//		}
-//		
-//		Place crypt = insert(Place.terminal("crypt", "You have found the crypt.\n"
-//				+"It is scary here, but there is an exit to outside.\n"+
-//				"Maybe you'll be safe out there."));
+				Place.create("towerTop", "You made it to the top! The sky is bright blue. You can see everything from up here. "
+						+ "\n\nThere is a scrap of paper pinned to the center of the floor. "
+						+ "\nThe paper reads: AS ABOVE SO BELOW "
+						+ "\n\nWeird... "));
+		towerTop.addExit(new Exit("towerTopStairs", "Go back down the stairs. "));
+		towerTop.addSecretExit(new SecretExit("ropeToFreedom", "You found a super long rope! Maybe you can use this to lower yourself down from the tower? "));
+// This is our top secret exit.
+		Place ropeToFreedom = insert(
+				Place.terminal("ropeToFreedom", "You slowly scale down the tower with your newfound rope. \n\nYou are free!")
+				);
 		
 		// Make sure your graph makes sense!
 		checkAllExitsGoSomewhere();
